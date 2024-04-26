@@ -26,7 +26,23 @@ class HashMap {
 
     get(key) {
         const index = this.hash(key)
-        return this.table[index]
+        if (this.has(key)) {
+            return this.table[index][1]
+        } else {
+            return null
+        }
+    }
+
+    has(key) {
+        const index = this.hash(key)
+        if (this.table[index]) {
+            if (this.table[index][0] == key) {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
     }
 
 }
@@ -37,5 +53,6 @@ m.set('name', 'corey')
 m.set('email', 'abc@gmail.com')
 m.set('phone', '123-456-7890')
 
-console.log(m.get('name'))
+console.log(m.get('phone'))
+console.log(m.has('name'))
 console.log(m.table)
