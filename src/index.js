@@ -21,6 +21,9 @@ class HashMap {
 
     set(key, value) {
         const index = this.hash(key)
+        if (this.has(key) == false) {
+            this.capacity++
+        }
         this.table[index] = [key, value]
     }
 
@@ -45,6 +48,21 @@ class HashMap {
         return false
     }
 
+    remove(key) {
+        const index = this.hash(key)
+        if (this.has(key)) {
+            delete this.table[index]
+            this.capacity--
+            return true
+        } else {
+            return false
+        }
+    }
+
+    length() {
+        return this.capacity
+    }
+
 }
 
 const m = new HashMap()
@@ -55,4 +73,7 @@ m.set('phone', '123-456-7890')
 
 console.log(m.get('phone'))
 console.log(m.has('name'))
+console.log(m.length())
+console.log(m.remove('name'))
+console.log(m.length())
 console.log(m.table)
