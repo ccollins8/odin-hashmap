@@ -40,20 +40,21 @@ class HashMap {
             }
             current.nextNode = new Node(key,value)
         }
-        // const index = this.hash(key)
-        // if (this.has(key) == false) {
-        //     this.capacity++
-        // }
-        // this.table[index] = [key, value]
     }
 
     get(key) {
-        // const index = this.hash(key)
-        // if (this.has(key)) {
-        //     return this.table[index][1]
-        // } else {
-        //     return null
-        // }
+        const index = this.hash(key)
+        if (this.has(key)) {
+
+            let current = this.table[index]
+            while (current) {
+                if (current.key == key) {
+                    return current.value
+                }
+            current = current.nextNode
+            }   
+        }
+        return null
     }
 
     has(key) {
@@ -121,8 +122,8 @@ const m = new HashMap()
 m.set('name', 'corey')
 m.set('email', 'abc@gmail.com')
 m.set('phone', '123-456-7890')
-m.set('jon', 'Smith')
-
-console.log(m.hash('Jon'))
+m.set('john', 'Smith')
 
 console.log(m.table)
+
+console.log(m.get('email'))
