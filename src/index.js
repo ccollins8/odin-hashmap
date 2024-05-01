@@ -115,13 +115,27 @@ class HashMap {
     }
 
     keys() {
-        const arr = []
+        let keys = []
         for (let i = 0; i < this.table.length; i++) {
-            if (this.table[i]) {
-                arr.push(this.table[i][0])
+            let current = this.table[i]
+            while (current) {
+                keys.push(current.key)
+                current = current.nextNode
             }
         }
-        return arr
+        return keys
+    }
+
+    values() {
+        let values = []
+        for (let i = 0; i < this.table.length; i++) {
+            let current = this.table[i]
+            while (current) {
+                values.push(current.value)
+                current = current.nextNode
+            }
+        }
+        return values
     }
 
 }
@@ -134,7 +148,9 @@ m.set('phone', '123-456-7890')
 m.set('john', 'Smith')
 
 console.log(m.remove('name'))
-console.log(m.remove('email'))
+console.log(m.remove('d'))
 
 console.log(m.length())
-console.log(m.table)
+console.log(m.table.length)
+console.log(m.keys())
+console.log(m.values())
