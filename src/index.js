@@ -138,6 +138,18 @@ class HashMap {
         return values
     }
 
+    entries() {
+        let entries = []
+        for (let i = 0; i < this.table.length; i++) {
+            let current = this.table[i]
+            while (current) {
+                entries.push([current.key, current.value])
+                current = current.nextNode
+            }
+        }
+        return entries   
+    }
+
 }
 
 const m = new HashMap()
@@ -147,10 +159,11 @@ m.set('email', 'abc@gmail.com')
 m.set('phone', '123-456-7890')
 m.set('john', 'Smith')
 
-console.log(m.remove('name'))
+console.log(m.remove('nme'))
 console.log(m.remove('d'))
 
 console.log(m.length())
 console.log(m.table.length)
 console.log(m.keys())
 console.log(m.values())
+console.log(m.entries())
