@@ -73,27 +73,33 @@ class HashMap {
         }
 
         return false
-
-        // const index = this.hash(key)
-        // if (this.table[index]) {
-        //     if (this.table[index][0] == key) {
-        //         return true
-        //     } else {
-        //         return false
-        //     }
-        // }
-        // return false
     }
 
     remove(key) {
         const index = this.hash(key)
         if (this.has(key)) {
-            delete this.table[index]
-            this.capacity--
-            return true
-        } else {
-            return false
+            let current = this.table[index]
+            let previous = null
+
+            if (current.key == key) {
+                this.table[index] = current.nextNode
+                if (this.table[index] == null) {
+                    delete this.table[index]
+                }
+                return true
+            }
+
+            while (current) {
+                if (current.key == key) {
+                    const next = current.nextNode
+                    previous.nextNode = next
+                    return true
+                }
+                previous = current
+                current = current.nextNode
+            }
         }
+        return false
     }
 
     length() {
@@ -126,4 +132,6 @@ m.set('john', 'Smith')
 
 console.log(m.table)
 
-console.log(m.get('email'))
+console.log(m.remove('john'))
+
+console.log(m.table)
