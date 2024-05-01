@@ -33,12 +33,14 @@ class HashMap {
         const index = this.hash(key)
         if (!this.table[index]) {
             this.table[index] = newNode
+            this.capacity++
         } else {
             let current = this.table[index]
             while (current.nextNode != null) {
                 current = current.nextNode
             }
             current.nextNode = new Node(key,value)
+            this.capacity++
         }
     }
 
@@ -83,6 +85,7 @@ class HashMap {
 
             if (current.key == key) {
                 this.table[index] = current.nextNode
+                this.capacity--
                 if (this.table[index] == null) {
                     delete this.table[index]
                 }
@@ -91,8 +94,8 @@ class HashMap {
 
             while (current) {
                 if (current.key == key) {
-                    const next = current.nextNode
-                    previous.nextNode = next
+                    previous.nextNode = current.nextNode
+                    this.capacity--
                     return true
                 }
                 previous = current
@@ -130,8 +133,8 @@ m.set('email', 'abc@gmail.com')
 m.set('phone', '123-456-7890')
 m.set('john', 'Smith')
 
-console.log(m.table)
+console.log(m.remove('name'))
+console.log(m.remove('email'))
 
-console.log(m.remove('john'))
-
+console.log(m.length())
 console.log(m.table)
