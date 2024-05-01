@@ -111,7 +111,7 @@ class HashMap {
 
     clear() {
         this.capacity = 0
-        this.table = new Array()
+        this.table = new Array(16)
     }
 
     keys() {
